@@ -13,32 +13,20 @@ connectDB();
 
 const app = express();
 
-// ✅ Manually Set CORS Headers (Fix for cookies issue)
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://zesty-caramel-5edb9a.netlify.app"
-  );
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  next();
-});
-
+// ✅ CORS Configuration (Fix for CORS issue)
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://zesty-caramel-5edb9a.netlify.app"],
-  credentials: true, // ✅ Allow credentials (⚠ Only works if a specific origin is set, not "*")
-  allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow all headers
+  origin: "https://zesty-caramel-5edb9a.netlify.app", // ✅ Allow only frontend URL
+  credentials: true, // ✅ Required for cookies/authentication
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ✅ Allow all methods
+  allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow required headers
 };
-app.use(cors(corsOptions));
 
-// ✅ Middleware (Always before routes)
-app.use(express.json()); // Body parser
-app.use(cookieParser()); // ✅ Allow reading cookies
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // ✅ Handle Preflight Requests
+
+// ✅ Middleware
+app.use(express.json()); // Parse JSON body
+app.use(cookieParser()); // Allow cookies
 
 // ✅ API Routes
 app.use("/api/auth", authRoutes);
@@ -48,9 +36,6 @@ app.use("/api/v1/payment", paymentRoutes);
 app.get("/", (req, res) => {
   res.send("✅ API is running...");
 });
-
-// ✅ Handle Preflight CORS Requests (OPTIONS method)
-app.options("*", cors(corsOptions));
 
 // ✅ Mistral AI Chatbot Route
 const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;

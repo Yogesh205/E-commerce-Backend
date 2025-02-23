@@ -28,12 +28,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ CORS Middleware
 const corsOptions = {
-  origin: "https://zesty-caramel-5edb9a.netlify.app", // ✅ Ensure correct frontend URL
-  credentials: true, // ✅ Required for cookies/authentication
-  allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow headers
-  methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Allowed methods
+  origin: "*", // ✅ Allow all origins (⚠ Not recommended for sensitive APIs)
+  credentials: true, // ✅ Allow credentials (⚠ Only works if a specific origin is set, not "*")
+  allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow all headers
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ✅ Allow all methods
 };
 app.use(cors(corsOptions));
 

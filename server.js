@@ -13,10 +13,10 @@ connectDB();
 
 const app = express();
 
-// ✅ CORS Configuration (Fix for CORS issue)
+// ✅ FIX: Correct CORS Configuration (Allow Netlify)
 const corsOptions = {
-  origin: "https://zesty-caramel-5edb9a.netlify.app", // ✅ Allow only frontend URL
-  credentials: true, // ✅ Required for cookies/authentication
+  origin: ["https://zesty-caramel-5edb9a.netlify.app"], // ✅ ONLY allow your frontend
+  credentials: true, // ✅ Required for cookies/auth
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ✅ Allow all methods
   allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow required headers
 };

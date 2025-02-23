@@ -15,7 +15,7 @@ const app = express();
 
 // ✅ CORS Configuration (Only Once)
 const corsOptions = {
-  origin: "https://zesty-caramel-5edb9a.netlify.app/", // ✅ Allow only frontend
+  origin: "https://zesty-caramel-5edb9a.netlify.app", // ✅ Allow only frontend
   credentials: true, // ✅ Allow cookies & authentication headers
 };
 app.use(cors(corsOptions)); // ✅ CORRECTED: Removed duplicate

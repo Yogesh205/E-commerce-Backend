@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/Product"); // Tumhara product model
+const Product = require("../models/product"); // Tumhara product model
 
 // 🔍 Search products API
 router.get("/search", async (req, res) => {

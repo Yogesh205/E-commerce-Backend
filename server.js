@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 const paymentRoutes = require("./routes/paymentRoutes");
 const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes"); // ✅ Import Product Routes
 
 // Connect to MongoDB
 connectDB();
@@ -31,6 +32,7 @@ app.use(cookieParser()); // Allow cookies
 // ✅ API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/products", productRoutes); // ✅ Add Product Routes
 
 // ✅ Test Route
 app.get("/", (req, res) => {

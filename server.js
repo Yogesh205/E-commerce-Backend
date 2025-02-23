@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 const corsOptions = {
-  origin: "*", // ✅ Allow all origins (⚠ Not recommended for sensitive APIs)
+  origin: ["http://localhost:5173", "https://zesty-caramel-5edb9a.netlify.app"],
   credentials: true, // ✅ Allow credentials (⚠ Only works if a specific origin is set, not "*")
   allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow all headers
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ✅ Allow all methods
